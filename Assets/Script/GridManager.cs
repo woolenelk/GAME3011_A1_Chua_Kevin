@@ -140,6 +140,8 @@ public class GridManager : MonoBehaviour
                     return;
                 GridObjects[y][x].GetComponent<CubeInfo>().Mined();
                 mines--;
+                if (mines == 0)
+                    RevealAll();
                 minesText.text = "" + mines;
                 break;
         }
@@ -164,5 +166,16 @@ public class GridManager : MonoBehaviour
         points += _points;
         pointsText.text = "" + points ;
         return points;
+    }
+
+    public void RevealAll()
+    {
+        for (int y = 0; y < SizeY; y++)
+        {
+            for (int x = 0; x < SizeX; x++)
+            {
+                GridObjects[y][x].GetComponent<CubeInfo>().Reveal();
+            }
+        }
     }
 }
